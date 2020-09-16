@@ -1,7 +1,13 @@
 import axios from "axios";
 import React, { Component } from "react";
-import styled from "styled-components";
+
 import { Button, Container, LinkContainer } from "../common/layout/Layout";
+import {
+  HeaderForm,
+  HeaderInput,
+  OuterContainer,
+  Description,
+} from "../common/layout/Form";
 
 class AddActivity extends Component {
   constructor(props) {
@@ -73,17 +79,6 @@ class AddActivity extends Component {
               value={this.state.activity}
               onChange={this.handleChange("activity")}
             />
-
-            {/* <Description htmlFor="type">
-              Tipo de processo (app ou camera)
-            </Description>
-            <HeaderInput
-              id="type"
-              name="type"
-              type="text"
-              value={this.state.type}
-              onChange={this.handleChange("type")}
-            /> */}
             <br />
             <Button>adicionar</Button>
           </HeaderForm>
@@ -94,30 +89,3 @@ class AddActivity extends Component {
 }
 
 export default AddActivity;
-
-const HeaderForm = styled.form`
-  flex-direction: row;
-`;
-
-const HeaderInput = styled.input`
-  line-height: 35px;
-  width: 100%;
-  text-align: left;
-  border-width: 1px;
-  border-style: solid;
-  border-image: initial;
-  border-radius: 4px;
-  outline: 0px;
-`;
-
-const OuterContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-`;
-
-const Description = styled.p`
-  padding: 0;
-  margin-bottom: 1rem;
-`;
