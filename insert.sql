@@ -1,0 +1,23 @@
+insert into users values (null, "Joao", "fortaleza", "joao@test.com", "13890419")
+insert into users values (null, "Ana", "caucaia", "ana@test.com", "19508124")
+insert into users values (null, "Felipe", "fortaleza", "felipe@yahoo.com", "12859102")
+insert into users values (null, "Caio", "sao paulo", "caio@test.com", "192058120598")
+insert into users values (null, "Patricia", "belem", "patricia@outlook.com", "38590215")
+insert into users values (null, "Josue", "rj", "josue@hotmail.com", "328950")
+
+
+insert into activities values (null, 1, "Especializacao Spring boot")
+insert into activities values (null, 2, "Curso node avancado")
+insert into activities values (null, 3, "Curso node avancado")
+insert into activities values (null, 4, "Curso node avancado")
+insert into activities values (null, 6, "Curso react basico")
+insert into activities values (null, 5, "Curso react basico")
+insert into activities values (null, 5, "Curso react basico")
+insert into activities values (null, 1, "Curso react basico")
+insert into activities values (null, 2, "Seminario de mongodb")
+insert into activities values (null, 3, "Disciplina de assembly")
+insert into activities values (null, 6, "Disciplina de assembly")
+insert into activities values (null, 2, "Disciplina de assembly")
+insert into activities values (null, 1, "Disciplina de assembly")
+insert into activities values (null, 3, "Disciplina de assembly")
+
