@@ -2,18 +2,17 @@ import React from "react";
 import "./App.css";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 
-import Layout from "./components/Layout";
+import Layout from "./components/common/layout/Content";
 
 import LandingPage from "./components/LandingPage";
 
-import Users from "./components/Users";
-import Activities from "./components/Activities";
+import Users from "./components/user/Users";
+import AddUser from "./components/user/AddUser";
+import UpdateUser from "./components/user/UpdateUser";
 
-import AddUser from "./components/AddUser";
-import UpdateUser from "./components/UpdateUser";
-
-import AddActivity from "./components/AddActivity";
-import UpdateActivity from "./components/UpdateActivity";
+import Activities from "./components/activity/Activities";
+import AddActivity from "./components/activity/AddActivity";
+import UpdateActivity from "./components/activity/UpdateActivity";
 
 import Page404 from "./components/Page404";
 
