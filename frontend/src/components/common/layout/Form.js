@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const OuterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+`;
+
 export const HeaderForm = styled.form`
   flex-direction: row;
 `;
@@ -13,13 +20,6 @@ export const HeaderInput = styled.input`
   border-image: initial;
   border-radius: 4px;
   outline: 0px;
-`;
-
-export const OuterContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
 `;
 
 export const Description = styled.p`

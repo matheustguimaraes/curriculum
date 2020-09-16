@@ -1,21 +1,5 @@
 import styled from "styled-components";
 
-export const ButtonDelete = styled.button`
-  cursor: pointer;
-  //   padding: 3px;
-  border-radius: 3px;
-  border: none;
-  user-select: none;
-  color: #fff;
-  background: red;
-  &:focus {
-    outline: none;
-  }
-  &:disabled {
-    background: gray;
-  }
-`;
-
 export const Wrapper = styled.div`
   padding: 2rem 0;
 `;
@@ -48,8 +32,26 @@ export const Item = styled.div`
   }
 `;
 
-export const Content = styled.div`
-  padding: 1rem 0;
+export const Card = styled.div`
+  padding: 1rem;
+  background: black;
+  height: 100%;
+`;
+
+export const ButtonDelete = styled.button`
+  cursor: pointer;
+  //   padding: 3px;
+  border-radius: 3px;
+  border: none;
+  user-select: none;
+  color: #fff;
+  background: red;
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    background: gray;
+  }
 `;
 
 export const Stats = styled.div`
@@ -84,8 +86,6 @@ export const Container = styled.div`
   }
 `;
 
-export const Card = styled.div`
-  padding: 1rem;
-  background: black;
-  height: 100%;
+export const Content = styled.div`
+  padding: 1rem 0;
 `;
