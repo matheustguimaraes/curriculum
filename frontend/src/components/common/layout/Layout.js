@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
@@ -48,4 +48,10 @@ export const Button = styled.button`
     `
 		background: #001F3F;
 	`}
+`;
+
+export const Description = styled.p`
+  padding: 0;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
 `;
