@@ -1,17 +1,18 @@
 import axios from "axios";
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Button, Container, LinkContainer } from "./common/layout/Layout";
+import { Button, Container, LinkContainer } from "../common/layout/Layout";
 
-class UpdateActivity extends Component {
+class AddUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
       apiURL: "http://localhost:8080",
-      activity: "",
+      name: "",
+      email: "",
+      address: "",
+      number: "",
       userId: "",
-      data: [],
-      activityId: "",
       isLoaded: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,20 +22,10 @@ class UpdateActivity extends Component {
     const url = window.location.href;
     const userId = url.substr(url.lastIndexOf("/") + 1);
 
-    axios
-      .get(`${this.state.apiURL}/activity/${userId.toString()}`)
-      .then((response) =>
-        this.setState({
-          activityId: userId,
-          userId: response.data.user,
-          activity: response.data.activity,
-          data: response.data,
-          isLoaded: true,
-        })
-      )
-      .catch((error) => {
-        console.log(error.response);
-      });
+    this.setState({
+      userId: parseInt(userId),
+      isLoaded: true,
+    });
   }
 
   handleChange = (name) => (event) => {
@@ -43,9 +34,11 @@ class UpdateActivity extends Component {
 
   handleSubmit = (event) => {
     axios
-      .put(`${this.state.apiURL}/activity/${this.state.activityId}`, {
-        user: this.state.userId,
-        activity: this.state.activity,
+      .post(`${this.state.apiURL}/user`, {
+        name: this.state.name,
+        address: this.state.address,
+        number: this.state.number,
+        email: this.state.email,
       })
       .then((response) => {
         console.log(response);
@@ -58,7 +51,6 @@ class UpdateActivity extends Component {
   };
 
   render() {
-    console.log("update act", this.state);
     if (!this.state.isLoaded) {
       return (
         <OuterContainer>
@@ -68,25 +60,51 @@ class UpdateActivity extends Component {
         </OuterContainer>
       );
     }
+
     return (
       <OuterContainer>
         <Container>
           <Button>
-            <LinkContainer to={`/user/${this.state.userId.toString()}`}>
-              voltar
-            </LinkContainer>
+            <LinkContainer to="/">voltar</LinkContainer>
           </Button>
 
           <HeaderForm onSubmit={this.handleSubmit}>
-            <Description htmlFor="activity">Atividade</Description>
+            <Description htmlFor="name">Primeiro name</Description>
             <HeaderInput
-              id="activity"
-              placeholder={this.state.activity}
-              name="activity"
+              id="name"
+              name="name"
               type="text"
-              value={this.state.activity}
-              onChange={this.handleChange("activity")}
+              value={this.state.name}
+              onChange={this.handleChange("name")}
             />
+
+            <Description htmlFor="email">Email</Description>
+            <HeaderInput
+              id="email"
+              name="email"
+              type="text"
+              value={this.state.email}
+              onChange={this.handleChange("email")}
+            />
+
+            <Description htmlFor="address">Endereço</Description>
+            <HeaderInput
+              id="address"
+              name="address"
+              type="text"
+              value={this.state.address}
+              onChange={this.handleChange("address")}
+            />
+
+            <Description htmlFor="number">Telefone</Description>
+            <HeaderInput
+              id="number"
+              name="number"
+              type="text"
+              value={this.state.number}
+              onChange={this.handleChange("number")}
+            />
+
             <br />
             <Button>adicionar</Button>
           </HeaderForm>
@@ -96,7 +114,7 @@ class UpdateActivity extends Component {
   }
 }
 
-export default UpdateActivity;
+export default AddUser;
 
 const HeaderForm = styled.form`
   flex-direction: row;

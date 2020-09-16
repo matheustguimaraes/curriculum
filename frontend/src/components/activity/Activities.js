@@ -1,21 +1,26 @@
-import axios from "axios";
 import React, { Component } from "react";
+import axios from "axios";
 import styled from "styled-components";
-import { OuterContainer, Button, LinkContainer } from "./common/layout/Layout";
+// import { Link } from "react-router-dom";
 
-class Users extends Component {
+import { Button, LinkContainer } from "../common/layout/Layout";
+
+class UserActivities extends Component {
   constructor(props) {
     super(props);
     this.state = {
       apiURL: "http://localhost:8080",
+      name: "",
       isLoaded: false,
       data: [],
+      userId: "",
     };
+    this.canvasRef = React.createRef();
   }
 
   deleteService = (name) => (event) => {
     axios
-      .delete(`${this.state.apiURL}/user/` + name)
+      .delete(`${this.state.apiURL}/activity/` + name)
       .then((response) => {
         console.log(response.data);
       })
@@ -26,12 +31,27 @@ class Users extends Component {
   };
 
   componentDidMount() {
+    const url = window.location.href;
+    const userId = url.substr(url.lastIndexOf("/") + 1);
+
     axios
-      .get(this.state.apiURL + "/user")
+      .get(`${this.state.apiURL}/activity`)
       .then((response) =>
         this.setState({
           data: response.data,
           isLoaded: true,
+          userId: parseInt(userId),
+        })
+      )
+      .catch((error) => {
+        console.log(error.response);
+      });
+
+    axios
+      .get(`${this.state.apiURL}/user/${userId}`)
+      .then((response) =>
+        this.setState({
+          name: response.data.name,
         })
       )
       .catch((error) => {
@@ -40,54 +60,55 @@ class Users extends Component {
   }
 
   render() {
-    console.log(this.state);
-
+    console.log("activities", this.state);
     if (!this.state.isLoaded) {
-      return (
-        <OuterContainer>
-          <Container>
-            <Description>loading</Description>
-          </Container>
-        </OuterContainer>
-      );
+      return <b>loading</b>;
     }
 
     return (
       <div>
         <Wrapper as={Container} id="projects">
-          {/* <Button>
-            <LinkContainer to="/">voltar para Home</LinkContainer>
-          </Button> */}
-          <h1>Usuários cadastrados</h1>
+          <h1>Atividades de {this.state.name}</h1>
+          <Button>
+            <LinkContainer to={`/update/${this.state.userId}`}>
+              editar usuário
+            </LinkContainer>
+          </Button>
           <Grid>
-            {this.state.data.map((value, index) => (
-              <Item key={index}>
-                <Card>
-                  <Content>
-                    <h4>
-                      <LinkContainer to={`/user/${value.id}`}>
-                        {value.name}
-                        <br />
-                        <h4>{value.email}</h4>
-                        <h4>email: {value.address}</h4>
-                        <h4>número: {value.number}</h4>
+            {this.state.data.map((value, index) =>
+              parseInt(value.user) === this.state.userId ? (
+                <Item key={index}>
+                  <Card>
+                    <Content>
+                      <LinkContainer to={`/activity/${this.state.userId}`}>
+                        <h4>{value.activity}</h4>
                       </LinkContainer>
-                    </h4>
-                  </Content>
-                  <Stats>
-                    <form onSubmit={this.deleteService(value.id)}>
-                      <div>
-                        <ButtonDelete>excluir</ButtonDelete>
-                      </div>
-                    </form>
-                  </Stats>
-                </Card>
-              </Item>
-            ))}
+                    </Content>
+                    <Stats>
+                      <form onSubmit={this.deleteService(this.state.userId)}>
+                        <div>
+                          <ButtonDelete>excluir</ButtonDelete>
+                        </div>
+                      </form>
+                    </Stats>
+                  </Card>
+                </Item>
+              ) : (
+                ""
+              )
+            )}
           </Grid>
           <Button>
-            <LinkContainer to="/add">adicionar usuário</LinkContainer>
+            <LinkContainer to={`/add/activity/${this.state.userId}`}>
+              adicionar atividade
+            </LinkContainer>
           </Button>
+          <br />
+          <br />
+          <Button>
+            <LinkContainer to="/">voltar</LinkContainer>
+          </Button>
+          <br />
         </Wrapper>
       </div>
     );
@@ -184,10 +205,4 @@ const Card = styled.div`
   height: 100%;
 `;
 
-const Description = styled.p`
-  padding: 0;
-  margin-bottom: 1rem;
-  font-size: 1.4rem;
-`;
-
-export default Users;
+export default UserActivities;

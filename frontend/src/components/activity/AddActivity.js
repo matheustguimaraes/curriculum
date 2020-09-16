@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Button, Container, LinkContainer } from "./common/layout/Layout";
+import { Button, Container, LinkContainer } from "../common/layout/Layout";
 
 class AddActivity extends Component {
   constructor(props) {
